@@ -1,8 +1,11 @@
 NKE — Landing Page Project
+
 Project type: A modern fashion and lifestyle brand
+
 Tech stack: HTML5 + CSS3
 
 Features
+
 User-Friendly Navigation: Easy navigation between the different sections of the website.
 Smart Goal Setting: Encourages users to set goals and organize their priorities.
 Time Management: Promotes effective time management and daily planning.
