@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+</head>
+<body>
+
+  <div class="container" id="loginPage">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input id="loginIdentifier" placeholder="Username or Email" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p id="loginMessage" class="message"></p>
+    </form>
+    <p>Don't have an account?
+      <a href="#" id="showRegister">Register</a>
+    </p>
+  </div>
+
+  <div class="container hidden" id="registerPage">
+    <h2>Create Account</h2>
+    <form id="registerForm">
+      <input id="regIdentifier" placeholder="Username or Email" required>
+      <input id="regPassword" type="password" placeholder="Password (8 characters minimum)" required>
+      <button type="submit">Register</button>
+      <p id="regMessage" class="message"></p>
+    </form>
+    <p>Already have an account?
+      <a href="#" id="showLogin">Login</a>
+    </p>
+  </div>
+
+  <div class="container hidden" id="dashboardPage">
+    <h1>Dashboard</h1>
+    <h2>Welcome, <span id="welcomeUser"></span>!</h2>
+    <p id="authMessage"></p>
+    <p>This is your protected dashboard.</p>
+    <button id="logoutButton">Logout</button>
+  </div>
+
+</body>
+</html>
