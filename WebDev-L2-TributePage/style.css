@@ -1,5 +1,7 @@
-/* GENERAL STYLING */
 
+/* =========================
+   GENERAL STYLING
+========================= */
 
 * {
     margin: 0;
@@ -9,22 +11,30 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #263746;
     line-height: 1.7;
     background-color: #f8f6f0;
 }
 
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+body.menu-open {
+    overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Playfair Display", serif;
 }
 
 a {
     text-decoration: none;
 }
 
-/* NAVIGATION BAR */
 
+/* =========================
+   NAVIGATION BAR
+========================= */
 
 header {
     background-color: #102a43;
@@ -65,11 +75,57 @@ header {
 }
 
 
-/* HERO SECTION */
+/* HAMBURGER BUTTON */
 
+.menu-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 9px;
+    border: 1px solid rgba(229, 189, 117, 0.65);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+    z-index: 103;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #ffffff;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* Hamburger transforms into X */
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
 
 .hero {
     min-height: 90vh;
+
     background:
         linear-gradient(
             rgba(8, 29, 48, 0.65),
@@ -79,10 +135,12 @@ header {
 
     background-size: cover;
     background-position: center;
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+
     padding: 40px 20px;
     color: white;
 }
@@ -128,8 +186,9 @@ header {
 }
 
 
-/* ABOUT SECTION */
-
+/* =========================
+   ABOUT SECTION
+========================= */
 
 .about {
     padding: 100px 8%;
@@ -167,8 +226,9 @@ header {
 }
 
 
-/* SECTION HEADINGS */
-
+/* =========================
+   SECTION HEADINGS
+========================= */
 
 .section-heading {
     text-align: center;
@@ -187,7 +247,9 @@ header {
 }
 
 
-/*  HISTORY TIMELINE */
+/* =========================
+   HISTORY TIMELINE
+========================= */
 
 .history {
     padding: 100px 8%;
@@ -251,7 +313,9 @@ header {
 }
 
 
-/* QUOTE SECTION */
+/* =========================
+   QUOTE SECTION
+========================= */
 
 .quote-section {
     background-color: #102a43;
@@ -266,14 +330,14 @@ header {
 }
 
 .quote-mark {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 90px;
     color: #c99e50;
     height: 75px;
 }
 
 blockquote {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: clamp(24px, 4vw, 36px);
     font-style: italic;
     line-height: 1.5;
@@ -286,7 +350,9 @@ blockquote {
 }
 
 
-/* SYMBOLISM SECTION */
+/* =========================
+   SYMBOLISM SECTION
+========================= */
 
 .symbolism {
     padding: 100px 8%;
@@ -329,7 +395,10 @@ blockquote {
     color: #687987;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     background-color: #091d30;
@@ -354,7 +423,10 @@ footer p {
     font-size: 11px;
 }
 
-/* RESPONSIVE DESIGN */
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
 @media (max-width: 900px) {
 
@@ -372,23 +444,116 @@ footer p {
     }
 }
 
+
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+
 @media (max-width: 600px) {
 
     .navbar {
-        flex-direction: column;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
         gap: 15px;
-        padding: 15px;
+        padding: 15px 20px;
     }
 
-    .navbar ul {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .logo {
+        font-size: 19px;
+    }
+
+    /* Show hamburger when JavaScript is available */
+
+    .js .menu-toggle {
+        display: flex;
+    }
+
+    /* Side drawer */
+
+    .js .navbar ul {
+        display: flex;
+        position: fixed;
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        z-index: 101;
+
+        width: min(320px, 85vw);
+        height: 100vh;
+        height: 100dvh;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        padding: 90px 24px 24px;
+
+        overflow-y: auto;
+
+        background-color: #102a43;
+
+        border-left: 1px solid rgba(229, 189, 117, 0.25);
+
+        box-shadow: -12px 0 30px rgba(0, 0, 0, 0.22);
+
+        transform: translateX(100%);
+        visibility: hidden;
+
+        transition:
+            transform 0.3s ease,
+            visibility 0s linear 0.3s;
+    }
+
+    /* Slide drawer into view */
+
+    .js .navbar.is-open ul {
+        transform: translateX(0);
+        visibility: visible;
+
+        transition:
+            transform 0.3s ease,
+            visibility 0s;
     }
 
     .navbar ul li a {
-        font-size: 12px;
+        display: block;
+        padding: 14px 4px;
+        font-size: 15px;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
+
+    /* Background overlay */
+
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+
+        z-index: 99;
+
+        background: rgba(5, 15, 28, 0.62);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0s linear 0.3s;
+    }
+
+    .nav-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0s;
+    }
+
+    /* Hero */
 
     .hero {
         min-height: 75vh;
@@ -401,6 +566,8 @@ footer p {
     .tagline {
         font-size: 15px;
     }
+
+    /* General sections */
 
     .about,
     .history,
@@ -416,6 +583,8 @@ footer p {
     .section-heading h2 {
         font-size: 30px;
     }
+
+    /* Timeline */
 
     .timeline::before {
         left: 65px;
@@ -438,11 +607,26 @@ footer p {
         font-size: 18px;
     }
 
+    /* Symbolism */
+
     .symbol-cards {
         grid-template-columns: 1fr;
     }
 
+    /* Quote */
+
     .quote-section {
         padding: 70px 20px;
+    }
+}
+
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-toggle span,
+    .js .navbar ul,
+    .nav-overlay {
+        transition: none;
     }
 }
