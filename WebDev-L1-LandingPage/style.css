@@ -89,6 +89,22 @@ nav {
     border-radius: 25px;
 }
 
+
+/* MOBILE NAVIGATION CONTROL */
+.menu-toggle {
+    display: none;
+}
+
+.nav-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-overlay {
+        display: block;
+    }
+}
+
 /* HERO SECTION */
 .hero {
     min-height: 620px;
@@ -380,20 +396,129 @@ footer {
 
 /* TABLET RESPONSIVENESS */
 @media (max-width: 768px) {
-
+    /* Keep the brand and menu control on one row. */
     nav {
-        flex-direction: column;
-        padding: 15px 0;
+        min-height: 75px;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /*
+       The header is its own stacking context. When the menu is open,
+       it must sit above the page overlay so the drawer is never dimmed.
+    */
+    body.menu-open header {
+        z-index: 1002;
     }
 
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(320px, 85vw);
+        height: 100dvh;
+        padding: 100px 28px 32px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        overflow-y: auto;
+        background: #070b16;
+        border-left: 1px solid rgba(255,255,255,0.10);
+        box-shadow: -16px 0 40px rgba(0,0,0,0.35);
+        list-style: none;
+        transform: translateX(105%);
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 300ms ease, visibility 300ms ease;
+        z-index: 2;
+    }
+
+    .nav-links.is-open {
+        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .nav-links a {
-        font-size: 13px;
+        display: block;
+        width: 100%;
+        padding: 18px 5px;
+        font-size: 16px;
+    }
+
+    .nav-links .nav-btn {
+        display: inline-block;
+        width: auto;
+        margin-top: 22px;
+        padding: 12px 20px;
+        border-bottom: 0;
+    }
+
+    .menu-toggle {
+        position: relative;
+        z-index: 3;
+        width: 46px;
+        height: 46px;
+        padding: 11px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid rgba(139,92,246,0.45);
+        border-radius: 10px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 21px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--light);
+        transition: transform 250ms ease, opacity 200ms ease;
+    }
+
+    .menu-toggle.is-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.is-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1001;
+        background: rgba(0,0,0,0.62);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 300ms ease, visibility 300ms ease;
+    }
+
+    .nav-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .hero {
@@ -437,11 +562,11 @@ footer {
     }
 
     .nav-links {
-        gap: 12px;
+        gap: 0;
     }
 
-    .nav-btn {
-        padding: 7px 12px;
+    .nav-links .nav-btn {
+        padding: 12px 20px;
     }
 
     .hero h1 {
